@@ -28,15 +28,12 @@ export async function handlerUsersCreate(req: Request, res: Response) {
     respondWithError(res, 500, "Couldn't create user", err);
   }
 }
-
 export async function handlerUsersGet(req: Request, res: Response, user: User) {
   respondWithJSON(res, 200, user);
 }
-
 function generateRandomSHA256Hash(): string {
-  // should we be using crypto.randomBytes instead of crypto.pseudoRandomBytes?
   return crypto
     .createHash("sha256")
-    .update(crypto.pseudoRandomBytes(32))
+    .update(crypto.randomBytes(32))
     .digest("hex");
 }
